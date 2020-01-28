@@ -11,7 +11,7 @@ CS410/510 Analytics & Data Science during Winter 2020 at Portland State Universi
   * Orion Crocker
 
 ## Team Logo
-![alt text](https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwiiiLD4l6fnAhWHrJ4KHeJXAHYQjRx6BAgBEAQ&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F389279961521082127%2F&psig=AOvVaw2xzp6mdbhSjRWuVEeoIKhQ&ust=1580331552022894 "Logo")
+![alt text](https://github.com/orioncrocker/teamlookout/blob/master/project/logo.jpeg "Logo")
 
 ## Project Summary
 The project focuses tentatively on the exploration of relationships between crash reports, traffic information and weather data on some highways in Oregon. Getting the correlation between these main components can impact planning and response to crashes for an individual driver and the transportation system as a whole. We hope to identify locations, times, and conditions that hotspots, that is, with a higher likelihood of crashes and impact on traffic flow after crashes.  This study is beneficial in diverse ways. Knowing peak periods and hotspots would resource allocation planning, emergency services, safety and regulation, and also any future volume expansion needs. Also, incorporating the results of the analysis may improve the richness of the "time-to-travel" feed available for drivers by providing safety information.
