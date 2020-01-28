@@ -4,11 +4,11 @@ Repository for Team Lookout's Collision Data Project
 CS410/510 Analytics & Data Science during Winter 2020 at Portland State University
 
 ## Team Members:
-..* Daniel Brewer
-..* Seth Seeman
-..* Ebele Esimai
-..* Ernesto Martinez
-..* Orion Crocker
+  * Daniel Brewer
+  * Seth Seeman
+  * Ebele Esimai
+  * Ernesto Martinez
+  * Orion Crocker
 
 ## Team Logo
 ![alt text](https://drive.google.com/file/d/1EOUvBDywpwdLE6bqUcDAlmHpt3kU5xcb/view?usp=sharing "Logo")
