@@ -19,7 +19,7 @@ with open('./DarkSkyApiKey.txt', 'r') as f:
 with open('./weather.csv', 'w') as outFile:
     outWriter = csv.writer(outFile)
     # write column headers
-    outWriter.writerow(['id', 'lat', 'long', 'datetime',   # keys
+    outWriter.writerow(['lat', 'long', 'datetime',   # keys
                         'summary',
                         'precipIntensity',
         #-- TODO precipProbability is probably just for _forecasts_... Is it in any of our 'current' data?
@@ -52,12 +52,10 @@ with open('./weather.csv', 'w') as outFile:
             return 31
 
 
-    primaryKey = 0
     for year in [2016]:     # range(2016, 2017) is not included in traffic at the moment
         for month in range(1, 3):   # 13):      i.e Jan-Dec inclusie
             for day in range(1, 3): #getDaysInMonth(month, year) + 1):
                 for hour in range(0, 2):    # 23):
-                    primaryKey += 1
                     baseDateTime = str(year) + "-" + str(month).zfill(2) + "-" + str(day).zfill(2) + \
                         " " + str(hour).zfill(2) + ":00:00"
                     epochTimeStr = str(int(time.mktime(time.strptime(baseDateTime, "%Y-%m-%d %H:%M:%S"))))
@@ -70,7 +68,6 @@ with open('./weather.csv', 'w') as outFile:
                         item = json.loads(res.text)
                         curWeather = item['currently']
                         outWriter.writerow([
-                            str(primaryKey),
                             gpsLoc[0],
                             gpsLoc[1],
                             baseDateTime,

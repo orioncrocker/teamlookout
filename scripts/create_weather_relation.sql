@@ -1,8 +1,7 @@
 create table weather (
-	id			INT NOT NULL PRIMARY key,
 	lat         FLOAT(12),
 	long 		FLOAT(12),
-	datetime	TIMESTAMP,
+	datetime	TIMESTAMP primary key,
 	summary		VARCHAR(20),
 	precipIntensity FLOAT(5),		-- The lowest number I've seen is 0.0007
 	temperature FLOAT(6),		-- Fahrenheit, as we selected in API Requests
