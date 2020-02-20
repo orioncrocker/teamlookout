@@ -51,11 +51,12 @@ with open('./weather.csv', 'w') as outFile:
         if month == 1 or month == 3 or month == 5 or month == 7 or month == 8 or month == 10 or month == 12:
             return 31
 
-
     for year in [2016]:     # range(2016, 2017) is not included in traffic at the moment
-        for month in range(1, 3):   # 13):      i.e Jan-Dec inclusie
-            for day in range(1, 3): #getDaysInMonth(month, year) + 1):
-                for hour in range(0, 2):    # 23):
+        for month in range(1, 13):      # i.e Jan-Dec inclusive
+            print("Gathering " + str(year) + "/" + str(month).zfill(2) + "...")
+            outFile.flush()
+            for day in range(1, getDaysInMonth(month, year) + 1):
+                for hour in range(0, 24):
                     baseDateTime = str(year) + "-" + str(month).zfill(2) + "-" + str(day).zfill(2) + \
                         " " + str(hour).zfill(2) + ":00:00"
                     epochTimeStr = str(int(time.mktime(time.strptime(baseDateTime, "%Y-%m-%d %H:%M:%S"))))
@@ -65,23 +66,30 @@ with open('./weather.csv', 'w') as outFile:
                             str(gpsLoc[0]) + ',' + str(gpsLoc[1]) + \
                             ',' + epochTimeStr
                         res = requests.get(reqString)
-                        item = json.loads(res.text)
-                        curWeather = item['currently']
-                        outWriter.writerow([
-                            gpsLoc[0],
-                            gpsLoc[1],
-                            baseDateTime,
-                            curWeather['summary'],
-                            curWeather['precipIntensity'],
-                            curWeather['temperature'],
-                            curWeather['apparentTemperature'],
-                            curWeather['humidity'],
-                            curWeather['windSpeed'],
-                            curWeather['windGust'],
-                            curWeather['cloudCover'],
-                            curWeather['uvIndex'],
-                            curWeather['visibility']
-                        ])
+                        if res is None:
+                            print("Failed get to response for :" + reqString)
+                        else:
+                            item = json.loads(res.text)
+                            curWeather = item.get('currently')
+                            if curWeather is None:
+                                print("Failed get to current weather for :" + reqString)
+                            else:
+                                outWriter.writerow([
+                                    gpsLoc[0],
+                                    gpsLoc[1],
+                                    baseDateTime,
+                                    curWeather.get('summary', ''),
+                                    curWeather.get('precipIntensity', ''),
+                                    curWeather.get('temperature', ''),
+                                    curWeather.get('apparentTemperature', ''),
+                                    curWeather.get('humidity', ''),
+                                    curWeather.get('windSpeed', ''),
+                                    curWeather.get('windGust', ''),
+                                    curWeather.get('cloudCover', ''),
+                                    curWeather.get('uvIndex', ''),
+                                    curWeather.get('visibility', '')
+                                ])
+
 
 
 ''' Database-related code
