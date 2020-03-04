@@ -1,7 +1,9 @@
---- Practicing how to join crashes and weather
+--- Here's how to join crashes and weather in Postgres, though I ended up not using this
 select crashid, weather.summary
 from i5north_bycrash crashes join weather on (crashes.date + crashes.hour = weather.datetime)
 group by crashid, weather.summary
+
+
 
 
 --- Count number of hours with each weather type
@@ -23,3 +25,25 @@ from (
 	order by milepost) as CrashCounts join countofhourswithweathertype on weather1 = weathersummary
 order by milepost, weather1
 	
+	
+	
+
+--- Count number of hours with each visibility level
+select visibility, count(datetime) as CountOfHours
+into CountOfHoursWithVisibilityLevel
+from weather 
+where visibility is not null
+group by visibility
+order by visibility
+
+
+--- Get Crashes/hour with each visibility level
+select milepost, visibility as VisibilityLevel, (CrashCount / CountOfHoursWithVisibilityLevel.CountOfHours) as CrashesPerHour
+into CrashesPerHourByVisibilityLevelAndMilepost
+from (
+	select milepost, (count(crashid) + 0.0000001) as CrashCount, visibility
+	from i5north_bycrash 
+	group by milepost, visibility
+	order by milepost) as CrashCounts natural join CountOfHoursWithVisibilityLevel
+order by milepost, visibility
+
